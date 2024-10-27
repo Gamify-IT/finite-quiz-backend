@@ -20,6 +20,7 @@
         <plugin.prettier.goal>write</plugin.prettier.goal>
         <spring-cloud.version>2021.0.3</spring-cloud.version>
         <org.springdoc.version>1.6.9</org.springdoc.version>
+        <liquibase.version>4.19.0</liquibase.version>
     </properties>
     <dependencies>
         <dependency>
@@ -81,6 +82,11 @@
             <groupId>org.springdoc</groupId>
             <artifactId>springdoc-openapi-ui</artifactId>
             <version>${org.springdoc.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.liquibase</groupId>
+            <artifactId>liquibase-core</artifactId>
+	    <version>${liquibase.version}</version>
         </dependency>
     </dependencies>
     <repositories>
