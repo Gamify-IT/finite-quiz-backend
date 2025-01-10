@@ -81,7 +81,17 @@ public class ConfigService {
         final String userId = jwtValidatorService.extractUserId(accessToken);
 
         KeybindingDTO keyBindingVolumeLevel = overworldClient.getKeybindingStatistic(userId, "VOLUME_LEVEL", accessToken);
-        Integer volumeLevel = Integer.parseInt(keyBindingVolumeLevel.getKey());
+        Integer volumeLevel;
+        if (keyBindingVolumeLevel.getKey() == null || keyBindingVolumeLevel.getKey().isEmpty()) {
+            volumeLevel = 0;
+        }
+        else {
+            try {
+                volumeLevel = Integer.parseInt(keyBindingVolumeLevel.getKey());
+            } catch (NumberFormatException e) {
+                throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid volume level format.");
+            }
+        }
 
         Configuration config = configurationRepository
                 .findById(id)
